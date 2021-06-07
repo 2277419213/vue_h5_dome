@@ -1,27 +1,33 @@
+/*
+ * @Descripttion: postcss.config.js
+ */
 module.exports = {
   plugins: {
-    // "postcss-import": {},
-    // "postcss-url": {},
-    // to edit target browsers: use "browserslist" field in package.json
-    "postcss-write-svg": {
-      uft8: false,
+    autoprefixer: {
+      /* PostCSS plugin to parse CSS and add vendor prefixes to CSS rules */
+      /* 配置文档链接：https://github.com/postcss/autoprefixer#options */
+      overrideBrowserslist: [
+        "last 2 versions", // 最后两个版本
+      ],
     },
-    "postcss-cssnext": {},
+    "postcss-viewport-units": {
+      /* vw兼容方案 */
+      /* 配置文档链接：https://github.com/springuper/postcss-viewport-units#options */
+    },
     "postcss-px-to-viewport": {
-      viewportWidth: 750, // 设计稿宽度
-      viewportHeight: 1334, // 设计稿高度，可以不指定
-      unitPrecision: 3, // px to vw无法整除时，保留几位小数
-      viewportUnit: "vw", // 转换成vw单位
-      selectorBlackList: [".ignore", ".hairlines"], // 不转换的类名
-      minPixelValue: 1, // 小于1px不转换
-      mediaQuery: false, // 允许媒体查询中转换
-      exclude: /(\/|\\)(node_modules)(\/|\\)/, //不转换我们引入的第三方包
+      /* 将px单位转换为视口单位的 (vw, vh, vmin, vmax) */
+      /* 配置文档链接：https://github.com/evrone/postcss-px-to-viewport/blob/master/README_CN.md#%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0 */
+      viewportWidth: 750,
+      viewportUnit: "vw",
+      unitPrecision: 3,
+      minPixelValue: 1, // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+      mediaQuery: false, // selectorBlackList: ['.vant'], // 以xxx开头
+      include: [], // 包括
+      exclude: [/(\/|\\)(node_modules)(\/|\\)/], // 排除
     },
-    "postcss-viewport-units": {},
-    cssnano: {
-      preset: "advanced",
-      autoprefixer: false, // 和cssnext同样具有autoprefixer，保留一个
-      "postcss-zindex": false,
+    "postcss-write-svg": {
+      /* 在retina屏绘制1px细线 */
+      /* 配置文档链接：https://github.com/jonathantneal/postcss-write-svg#options */
     },
   },
 };
